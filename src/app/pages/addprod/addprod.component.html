@@ -1,0 +1,105 @@
+<div class="content bg-medium   p-3" role="main">
+
+  <div class="bg-light">
+
+    <div class="">
+  
+      <h1> Formulario de Registro</h1>
+
+      <p *ngIf="registered">Registrado con exito</p>
+      <p *ngIf="error">Error debe especificar nombre y descripcion</p>
+      <p *ngIf="errorUndefined" class="text-danger">Error de comunicacion o no definido</p>
+
+      <form [formGroup]="registerForm"><!--  (ngSubmit)="makeRegister()" -->
+        <div class="grid">
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label >ID</label>
+                <input formControlName="id"  class="form-control" id="id"  placeholder="ID">
+                <div class="content-text-danger">
+                  <label *ngIf="registerForm.controls['id'].touched && registerForm.controls['id'].invalid" class="text-danger">
+                    ID no valido.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label >Nombre</label>
+                <input  class="form-control" id="name" formControlName="name"  placeholder="Nombre">
+                <div class="content-text-danger">
+                  <label *ngIf="registerForm.controls['name'].touched && registerForm.controls['name'].invalid" class="text-danger">
+                    Nombre no valido.
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label >Descripción</label>
+                <input  class="form-control" id="describe" formControlName="describe" placeholder="Nombre">
+                <div class="content-text-danger">
+                  <label *ngIf="registerForm.controls['describe'].touched && registerForm.controls['describe'].invalid" class="text-danger">
+                    Este campo es requerido.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label >Logo</label>
+                <input  class="form-control" id="logo" formControlName="logo" placeholder="Logo">
+                <div class="content-text-danger">
+                  <label *ngIf="registerForm.controls['logo'].touched && registerForm.controls['logo'].invalid" class="text-danger">
+                    Este campo es requerido.
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label >Fecha Liberación</label>
+                <input (change)="calculateDate()" type="date" class="form-control" id="date_free" formControlName="date_free" placeholder="Fecha Liberación">
+                <div class="content-text-danger">
+                  <label *ngIf="registerForm.controls['date_free'].touched && registerForm.controls['date_free'].invalid" class="text-danger">
+                    Este campo es requerido.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label >Fecha Revisión</label>
+                <input type="date" class="form-control" id="date_review" formControlName="date_review" placeholder="Fecha Revisión">
+                <div class="content-text-danger">
+                  <label *ngIf="registerForm.controls['date_review'].touched && registerForm.controls['date_review'].invalid" class="text-danger">
+                    Este campo es requerido.
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+  
+    </div>
+  
+    <div>
+  
+      <button type="button" class="btn btn-secondary" (click)="back()">Volver</button>
+      <button type="button" class="btn btn-secondary" (click)="reset()">Reiniciar</button>
+      <button id="send" type="submit" [disabled]="loading || !registerForm.valid" class="btn btn-primary" (click)="makeRegister()">Enviar</button>
+    </div>
+
+  </div>
+</div>

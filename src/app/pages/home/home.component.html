@@ -1,0 +1,81 @@
+<div class="content bg-medium" role="main">
+
+  <div class="toolbar">
+
+    <input type="search" class="form-control" placeholder="Search" (keyup)="search($event)" />
+
+    <div class="spacer"></div>
+
+    <button class="btn btn-primary" (click)="add()">
+      Agregar
+    </button>
+
+  </div>
+
+  <div class=" bg-light">
+
+    <table class="table">
+      <thead class="bg-medium">
+        <tr>
+          <th scope="col">Logo</th>
+          <th scope="col">Nombre del Producto</th>
+          <th scope="col">Descripción <i alt="Descripción"></i></th>
+          <th scope="col">Fecha de Liberación <i alt="Fecha de Liberación"></i></th>
+          <th scope="col">Fecha de Reestructuración <i alt="Fecha de Reestructuración"></i></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of prodsAux" class="prod" >
+          <td>
+            <img [src]="prod.logo" width="50" alt="imagen del producto" class="rounded-circle" />
+          </td>
+          <td>{{prod.name}}</td>
+          <td>{{prod.description}}</td>
+          <td>{{prod.date_release | date : 'dd/MM/yyyy'}}</td>
+          <td>{{prod.date_revision | date : 'dd/MM/yyyy'}}</td>
+          <td>
+            <button class="btn" (click)="options(prod)">
+              <i class="fa fa-more">...</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- MODALS -->
+    <app-options id="options">
+      <h1>Opciones</h1>
+      <p><button class="btn btn-primary" (click)="edit();">Editar</button></p>
+      <p> <button class="btn btn-primary" (click)="delete();">Eliminar</button></p>
+      <button  class="btn" (click)="modalService.close();">Close</button>
+    </app-options>
+
+    <app-options id="confirm">
+      <h1>¿Confirma que desea eliminar el siguiente elemento?</h1>
+      <p> id: {{currentProd?.id}}</p>
+      <p> name: {{currentProd?.name}}</p>
+      <p> description: {{currentProd?.description}}</p>
+      <p> <button class="btn btn-primary" (click)="makeDelete();" [disabled]="loading">Eliminar</button></p>
+      <button (click)="modalService.close();">Cancelar</button>
+    </app-options>
+
+    
+    <h2>{{lengthProds}} Resultados</h2>
+  </div>
+
+
+  <!-- Footer -->
+  <footer>
+    Desarrollado por Ivan Diaz&nbsp;
+    <a href="https://ivancho2802.github.io/ings.ivandiaz/#portfolio" target="_blank" rel="noopener">
+      Este es mi portafolio.
+      <div class="github-star-badge">
+        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
+        Star
+      </div>
+    </a>
+  </footer>
+</div>
